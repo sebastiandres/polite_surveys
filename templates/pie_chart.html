@@ -1,0 +1,39 @@
+<HTML>
+    <head>
+        <title>polite: pie chart</title>
+        <script src="{{url_for('static', filename='chart.xkcd.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      </head>
+    
+    <BODY>
+        <h2>Polite: pie chart for survey #{{data['survey_id']}}</h2>
+        <h3>A "poll lite" system with minimal python, html and javascript.</h3>
+
+        <div style="width: 1000px; height: 800px;">
+            <svg class="pie-chart"></svg>
+        </div>
+        <script>
+            const svg = document.querySelector('.pie-chart');
+            const pieChart = new chartXkcd.Pie(svg, {
+            title: "{{ data['title'] }}", // optional
+            data: {
+                    labels: 
+                    [
+                      {%for label in data['data.labels']%} 
+                        "{{label}}",
+                      {%endfor%} 
+                    ],
+                    datasets: [{
+                        data: {{ data['data.datasets.data'] }},
+                    }],
+                }, 
+            options: { // optional
+                innerRadius: 0.5,
+                legendPosition: chartXkcd.config.positionType.upRight,
+            },
+            });        
+        </script>
+        <br>
+        <a href="{{ url_for('index') }}">Back</a>
+    </BODY>
+</HTML>

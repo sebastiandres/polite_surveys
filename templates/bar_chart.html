@@ -1,0 +1,41 @@
+<HTML>
+    <head>
+        <title>polite: bar chart</title>
+        <script src="{{url_for('static', filename='chart.xkcd.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    
+    <BODY>
+        <h2>Polite: bar chart for survey #{{data['survey_id']}}</h2>
+        <h3>A "poll lite" system with minimal python, html and javascript.</h3>
+
+        <div style="width: 1000px; height: 600px;">
+        <svg class="bar-chart" width=100px></svg>
+        </div>
+        <script>
+            const svg = document.querySelector('.bar-chart')
+            
+            const barChart = new chartXkcd.Bar(svg, {
+                title: "{{ data['title'] }}", 
+                yLabel: "{{ data['yLabel'] }}",
+                data: {
+                    labels: 
+                    [
+                      {%for label in data['data.labels']%} 
+                        "{{label}}",
+                      {%endfor%} 
+                    ],
+                    datasets: [{
+                        data: {{ data['data.datasets.data'] }},
+                    }],
+                },
+                options: { // optional
+                    yTickCount: 2,
+                },
+            });
+        
+        </script>        
+        <br>
+        <a href="{{ url_for('index') }}">Back</a>
+    </BODY>
+</HTML>

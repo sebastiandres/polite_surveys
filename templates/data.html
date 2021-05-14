@@ -1,0 +1,26 @@
+<HTML>
+    <head>
+        <title>polite: data</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      </head>
+    
+    <BODY bgcolor="white">
+        <h2>Polite: data for survey #{{data['survey_id']}}</h2>
+        <h3>A "poll lite" system with minimal python, html and javascript.</h3>
+
+        Pregunta: "{{data['question_str']}}"<br>
+        <br>
+        Todas las respuestas:<br>
+        <table>
+        {{data['df'].to_html(index=False)|safe}}
+        </table>
+        <br>
+        Conteo de respuestas:<br>
+        <table>
+        {{data['df_count'].to_html(index=False)|safe}}
+        </table>            
+        <br>
+        <a href="{{ url_for('index') }}">Back</a>
+
+    </BODY>
+</HTML>

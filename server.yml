@@ -1,0 +1,5 @@
+MYSQL_HOST:  'sebastiandres.mysql.pythonanywhere-services.com'
+MYSQL_USER : 'sebastiandres'
+MYSQL_PASSWORD : 'raizraiz'
+MYSQL_DB : 'POLITE'
+DEBUG_MODE : 'False'
